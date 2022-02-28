@@ -1,8 +1,8 @@
-GET http://localhost:3003/api/blogs
+GET http://localhost:3001/api/blogs
 
 ###
 
-POST http://localhost:3003/api/blogs
+POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
@@ -11,3 +11,7 @@ Content-Type: application/json
     "url":"https://css-tricks.com/9-new-react-and-javascript-links-for-february-2022/",
     "likes":0
 }
+
+###
+
+DELETE http://localhost:3001/api/blogs/6219fcfcef8966b95fea99e8
