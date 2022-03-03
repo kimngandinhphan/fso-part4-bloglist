@@ -4,14 +4,29 @@ GET http://localhost:3001/api/blogs
 
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWY4YWJhMDMxNWExYzgyYmFmYTU4OCIsInVzZXJuYW1lIjoiY2hhcmxvdHRlIiwiaWF0IjoxNjQ2Mjg4MTQ4fQ.W4IxrU0AtKPIMsFURLI3VcJrkiT2AR3pzcUdreFogd4
 
 {
-    "title":"9 New React and JavaScript Links for February 2022",
-    "author":"Chris Coyier",
-    "url":"https://css-tricks.com/9-new-react-and-javascript-links-for-february-2022/",
-    "likes":0
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 7
 }
 
 ###
 
-DELETE http://localhost:3001/api/blogs/6219fcfcef8966b95fea99e8
+DELETE http://localhost:3001/api/blogs/62205d81e107c22bed8c1391
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWY4YWJhMDMxNWExYzgyYmFmYTU4OCIsInVzZXJuYW1lIjoiY2hhcmxvdHRlIiwiaWF0IjoxNjQ2Mjg4MTQ4fQ.W4IxrU0AtKPIMsFURLI3VcJrkiT2AR3pzcUdreFogd4
+###
+
+PUT http://localhost:3001/api/blogs/62205d81e107c22bed8c1391
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWY4YWJhMDMxNWExYzgyYmFmYTU4OCIsInVzZXJuYW1lIjoiY2hhcmxvdHRlIiwiaWF0IjoxNjQ2Mjg4MTQ4fQ.W4IxrU0AtKPIMsFURLI3VcJrkiT2AR3pzcUdreFogd4
+
+{
+    "likes": 8
+}
+
+###
+
+DELETE http://localhost:3001/unknow-endpoint

@@ -11,6 +11,19 @@ beforeEach(async () => {
     await Blog.insertMany(helper.initialBlogs)
 })
 
+describe('POST /login', () => {
+    test('response with token and user info', async () => {
+        const loginInfo = { username: 'root', password: 'sekret' }
+        const response = await api
+            .post('/api/login')
+            .send(loginInfo)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+
+        console.log(response.body)
+    })
+})
+
 describe('GET /blogs', () => {
     test('response with json and correct amount', async () => {
         const response = await api
@@ -25,7 +38,7 @@ describe('GET /blogs', () => {
         const response = await api.get('/api/blogs')
         expect(response.body[0].id).toBeDefined()
     })
-}, 7000)
+})
 
 describe('POST /blogs', () => {
     test('successfully creates a new blog', async () => {
@@ -38,6 +51,7 @@ describe('POST /blogs', () => {
 
         const response = await api
             .post('/api/blogs')
+            .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYxYTI3YjIyNTIzNDFjYWY5YmY4NCIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY0NjI4MTMyNH0.lusoxJjg2I7o7CIYGt7e0sbCuGhlDWVLSEy9KITykcw')
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -56,6 +70,7 @@ describe('POST /blogs', () => {
 
         const response = await api
             .post('/api/blogs')
+            .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYxYTI3YjIyNTIzNDFjYWY5YmY4NCIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY0NjI4MTMyNH0.lusoxJjg2I7o7CIYGt7e0sbCuGhlDWVLSEy9KITykcw')
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -69,10 +84,11 @@ describe('POST /blogs', () => {
 
         const response = await api
             .post('/api/blogs')
+            .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYxYTI3YjIyNTIzNDFjYWY5YmY4NCIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY0NjI4MTMyNH0.lusoxJjg2I7o7CIYGt7e0sbCuGhlDWVLSEy9KITykcw')
             .send(newBlog)
             .expect(400)
     })
-}, 7000)
+})
 
 describe('DELETE /blogs/:id', () => {
     test('sucessfully delete with status 204 if id was valid', async () => {
@@ -81,12 +97,13 @@ describe('DELETE /blogs/:id', () => {
 
         const response = await api
             .delete(`/api/blogs/${blogToDelete.id}`)
+            .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYxYTI3YjIyNTIzNDFjYWY5YmY4NCIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY0NjI4MTMyNH0.lusoxJjg2I7o7CIYGt7e0sbCuGhlDWVLSEy9KITykcw')
             .expect(204)
 
         const blogsAtEnd = await helper.blogsInDb()
         expect(blogsAtEnd.map(blog => blog.title)).not.toContain(blogToDelete.title)
     })
-}, 7000)
+})
 
 describe('PUT /blogs/:id', () => {
     test('sucessfully update', async () => {
@@ -95,13 +112,14 @@ describe('PUT /blogs/:id', () => {
 
         const response = await api
             .put(`/api/blogs/${blogToUpdate.id}`)
-            .send({likes: blogToUpdate.likes + 1})
+            .set('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYxYTI3YjIyNTIzNDFjYWY5YmY4NCIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTY0NjI4MTMyNH0.lusoxJjg2I7o7CIYGt7e0sbCuGhlDWVLSEy9KITykcw')
+            .send({ likes: blogToUpdate.likes + 1 })
             .expect('Content-Type', /application\/json/)
 
         const blogsAtEnd = await helper.blogsInDb()
         expect(blogsAtEnd[0].likes).toBe(blogToUpdate.likes + 1)
     })
-}, 7000)
+})
 
 afterAll(() => {
     mongoose.connection.close()
